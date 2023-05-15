@@ -13,6 +13,8 @@ import Shipping from "./pages/Shipping";
 import Payment from "./pages/Payment";
 import PlaceOrder from "./pages/PlaceOrder";
 import Order from "./pages/Order";
+import UserList from "./pages/UserList";
+import EditUser from "./pages/EditUser";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             <Route path="/payment" Component={Payment} />
             <Route path="/placeorder" Component={PlaceOrder} />
             <Route path="/order/:id" Component={Order} />
+            <Route path="/admin/userlist" Component={UserList} />
+            <Route path="/admin/user/:id/edit" Component={EditUser} />
           </Routes>
         </Container>
       </main>

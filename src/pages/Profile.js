@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
-// import { listMyOrders } from '../actions/orderActions'
+import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -29,8 +29,8 @@ const Profile = () => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
 
-  //   const orderListMy = useSelector((state) => state.orderListMy)
-  //   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
+  const orderListMy = useSelector((state) => state.orderListMy);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
   useEffect(() => {
     if (!userInfo) {
@@ -39,7 +39,7 @@ const Profile = () => {
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
-        // dispatch(listMyOrders())
+        dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -49,14 +49,14 @@ const Profile = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if(password.length <=5){
-        return setMessage("password should be 6 or above!!")
+    if (password.length <= 5) {
+      return setMessage("password should be 6 or above!!");
     }
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }));
-      setMessage('')
+      setMessage("");
     }
   };
 
@@ -123,14 +123,14 @@ const Profile = () => {
           </Form>
         )}
       </Col>
-      {/* <Col md={9}>
+      <Col md={9}>
         <h2>My Orders</h2>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
-          <Message variant='danger'>{errorOrders}</Message>
+          <Message variant="danger">{errorOrders}</Message>
         ) : (
-          <Table striped bordered hover responsive className='table-sm'>
+          <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
                 <th>ID</th>
@@ -151,19 +151,19 @@ const Profile = () => {
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
                     ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
                     )}
                   </td>
                   <td>
                     {order.isDelivered ? (
                       order.deliveredAt.substring(0, 10)
                     ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
                     )}
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                      <Button className='btn-sm' variant='light'>
+                      <Button className="btn-sm" variant="light">
                         Details
                       </Button>
                     </LinkContainer>
@@ -173,7 +173,7 @@ const Profile = () => {
             </tbody>
           </Table>
         )}
-      </Col> */}
+      </Col>
     </Row>
   );
 };
