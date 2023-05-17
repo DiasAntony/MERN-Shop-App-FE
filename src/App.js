@@ -19,7 +19,6 @@ import ProductList from "./pages/ProductList";
 import EditProduct from "./pages/EditProduct";
 import OrderList from "./pages/OrderList";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -27,7 +26,6 @@ function App() {
       <main className="py-3">
         <Container>
           <Routes>
-            <Route path="/" Component={Home} />
             <Route path="/product/:id" Component={ProductDetails} />
             {/* question(?) mark give a different logic if it not that route not work=> when use ----  /cart  ----- */}
             <Route path="/cart/:id?" Component={Cart} />
@@ -40,9 +38,17 @@ function App() {
             <Route path="/order/:id" Component={Order} />
             <Route path="/admin/userlist" Component={UserList} />
             <Route path="/admin/productlist" Component={ProductList} />
+            <Route
+              path="/admin/productlist/:pageNumber"
+              component={ProductList}
+              exact
+            />
             <Route path="/admin/orderlist" Component={OrderList} />
             <Route path="/admin/user/:id/edit" Component={EditUser} />
             <Route path="/admin/product/:id/edit" Component={EditProduct} />
+            <Route path="/page/:pageNumber" component={Home} />
+            <Route path="/search/:keyword/page/:pageNumber" component={Home} />
+            <Route path="/" Component={Home} />
           </Routes>
         </Container>
       </main>

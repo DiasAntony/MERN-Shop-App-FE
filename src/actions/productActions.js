@@ -96,7 +96,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     dispatch({
       type: PRODUCT_DELETE_REQUEST,
     })
-
+// take user token from localstorage!!
     const {
       userLogin: { userInfo },
     } = getState()

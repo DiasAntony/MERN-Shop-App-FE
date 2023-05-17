@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
+import Meta from '../components/Meta'
 
 const CartScreen = () => {
   const params=useParams()
@@ -36,6 +37,8 @@ const CartScreen = () => {
   }
 
   return (
+    <>
+    <Meta title='cart' />
     <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
@@ -115,6 +118,7 @@ const CartScreen = () => {
         </Card>
       </Col>
     </Row>
+    </>
   )
 }
 

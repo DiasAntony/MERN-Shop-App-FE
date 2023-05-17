@@ -7,7 +7,8 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import Meta from "../components/Meta";
 
 const Profile = () => {
   const [name, setName] = useState("");
@@ -18,7 +19,6 @@ const Profile = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -61,6 +61,8 @@ const Profile = () => {
   };
 
   return (
+    <>
+    <Meta title={user.name} />
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
@@ -175,6 +177,7 @@ const Profile = () => {
         )}
       </Col>
     </Row>
+    </>
   );
 };
 

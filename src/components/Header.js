@@ -1,37 +1,37 @@
-import React from "react";
-import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../actions/userActions";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import { logout } from '../actions/userActions'
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const user = useSelector((state) => state.userLogin.userInfo);
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
-  // console.log(user);
   const logoutHandler = () => {
-    dispatch(logout());
-  };
+    dispatch(logout())
+  }
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>Shop App</Navbar.Brand>
+          <LinkContainer to='/'>
+            <Navbar.Brand>ShopApp</Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
-              <LinkContainer to="/cart">
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='ml-auto'>
+              <LinkContainer to='/cart'>
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> Cart
+                  <i className='fas fa-shopping-cart'></i> Cart
                 </Nav.Link>
               </LinkContainer>
-              {user ? (
-                <NavDropdown title={user.name} id="username">
-                  <LinkContainer to="/profile">
+              {userInfo ? (
+                <NavDropdown title={userInfo.name} id='username'>
+                  <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
@@ -39,13 +39,13 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <LinkContainer to="/login">
+                <LinkContainer to='/login'>
                   <Nav.Link>
-                    <i className="fas fa-user"></i> Sign-In
+                    <i className='fas fa-user'></i> Sign In
                   </Nav.Link>
                 </LinkContainer>
               )}
-              {user && user.isAdmin && (
+              {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenu'>
                   <LinkContainer to='/admin/userlist'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
@@ -63,7 +63,7 @@ const Header = () => {
         </Container>
       </Navbar>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
